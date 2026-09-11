@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navigation_splash">
+
+    <fragment
+        android:id="@+id/navigation_splash"
+        android:name="com.example.caloriestracker.SplashFragment"
+        android:label="Splash"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/action_splash_to_login"
+            app:destination="@id/navigation_login"
+            app:popUpTo="@id/navigation_splash"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_login"
+        android:name="com.example.caloriestracker.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_login_to_register"
+            app:destination="@id/navigation_register" />
+        <action
+            android:id="@+id/action_login_to_dashboard"
+            app:destination="@id/navigation_dashboard"
+            app:popUpTo="@id/navigation_login"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_register"
+        android:name="com.example.caloriestracker.RegisterFragment"
+        android:label="Register"
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_register_to_login"
+            app:destination="@id/navigation_login"
+            app:popUpTo="@id/navigation_register"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.example.caloriestracker.DashboardFragment"
+        android:label="Dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <!-- Placeholders for bottom nav to avoid crashes -->
+    <fragment
+        android:id="@+id/navigation_diary"
+        android:name="com.example.caloriestracker.DashboardFragment"
+        android:label="Diary" />
+    <fragment
+        android:id="@+id/navigation_plan"
+        android:name="com.example.caloriestracker.DashboardFragment"
+        android:label="Plan" />
+    <fragment
+        android:id="@+id/navigation_more"
+        android:name="com.example.caloriestracker.DashboardFragment"
+        android:label="More" />
+
+    <fragment
+        android:id="@+id/navigation_scanner"
+        android:name="com.example.caloriestracker.ScannerFragment"
+        android:label="Scanner"
+        tools:layout="@layout/fragment_scanner" />
+
+</navigation>
