@@ -19,8 +19,17 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.common.InputImage
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import android.content.Context
+import android.widget.Button
+import android.widget.EditText
+
+import androidx.navigation.fragment.findNavController
 
 class ScannerFragment : Fragment() {
 
@@ -33,10 +42,14 @@ class ScannerFragment : Fragment() {
     private lateinit var tvCaptureInstruction: TextView
     private lateinit var cardNutrition: CardView
     private lateinit var tvCalories: TextView
+    private lateinit var etMealName: EditText
+    private lateinit var btnAddMeal: Button
     private lateinit var cameraExecutor: ExecutorService
     
     private var isBarcodeMode = false
     private var imageCapture: ImageCapture? = null
+    private var lastScannedBarcode: String? = null
+    private var scannedMeal: MealEntity? = null
 
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -62,6 +75,8 @@ class ScannerFragment : Fragment() {
         tvCaptureInstruction = view.findViewById(R.id.tvCaptureInstruction)
         cardNutrition = view.findViewById(R.id.cardNutrition)
         tvCalories = view.findViewById(R.id.tvCalories)
+        etMealName = view.findViewById(R.id.etMealName)
+        btnAddMeal = view.findViewById(R.id.btnAddMeal)
         
         cameraExecutor = Executors.newSingleThreadExecutor()
 
@@ -75,7 +90,26 @@ class ScannerFragment : Fragment() {
             if (!isBarcodeMode) {
                 // Simulate photo capture and analysis
                 cardNutrition.visibility = View.VISIBLE
+                etMealName.setText("Plat Inconnu")
                 tvCalories.text = "Analyse IA...\n450 cal estimées"
+                val sharedPref = requireActivity().getSharedPreferences("user_session", Context.MODE_PRIVATE)
+                val userId = sharedPref.getInt("user_id", -1)
+                scannedMeal = MealEntity(userId = userId, name = "Plat Inconnu", mealType = "Déjeuner", calories = 450)
+            }
+        }
+
+        btnAddMeal.setOnClickListener {
+            scannedMeal?.let { meal ->
+                val finalName = etMealName.text.toString()
+                val updatedMeal = meal.copy(name = if(finalName.isNotBlank()) finalName else meal.name)
+                CoroutineScope(Dispatchers.IO).launch {
+                    val db = AppDatabase.getDatabase(requireContext())
+                    db.mealDao().insertMeal(updatedMeal)
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(context, "Repas ajouté !", Toast.LENGTH_SHORT).show()
+                        findNavController().navigate(R.id.navigation_dashboard)
+                    }
+                }
             }
         }
 
@@ -129,9 +163,43 @@ class ScannerFragment : Fragment() {
                         .build()
                         .also {
                             it.setAnalyzer(cameraExecutor, BarcodeAnalyzer { barcodeValue ->
+                                if (barcodeValue == lastScannedBarcode) return@BarcodeAnalyzer
+                                lastScannedBarcode = barcodeValue
+
                                 activity?.runOnUiThread {
+                                    tvCalories.text = "Recherche Code: $barcodeValue..."
                                     cardNutrition.visibility = View.VISIBLE
-                                    tvCalories.text = "Code: $barcodeValue\n112 cal"
+                                }
+
+                                CoroutineScope(Dispatchers.IO).launch {
+                                    try {
+                                        val response = ApiClient.openFoodFactsApi.getProductByBarcode(barcodeValue)
+                                        if (response.isSuccessful) {
+                                            val product = response.body()?.product
+                                            val productName = product?.productName ?: "Produit Inconnu"
+                                            val cals = product?.nutriments?.calories100g?.toInt() ?: 0
+                                            val protein = product?.nutriments?.proteins100g?.toInt() ?: 0
+                                            val carbs = product?.nutriments?.carbs100g?.toInt() ?: 0
+                                            val fat = product?.nutriments?.fat100g?.toInt() ?: 0
+
+                                            val sharedPref = requireActivity().getSharedPreferences("user_session", Context.MODE_PRIVATE)
+                                            val userId = sharedPref.getInt("user_id", -1)
+                                            scannedMeal = MealEntity(userId = userId, name = productName, mealType = "Snack", calories = cals, protein = protein, carbs = carbs, fat = fat)
+
+                                            withContext(Dispatchers.Main) {
+                                                etMealName.setText(productName)
+                                                tvCalories.text = "$cals cal (100g) | P:$protein g | G:$carbs g"
+                                            }
+                                        } else {
+                                            withContext(Dispatchers.Main) {
+                                                tvCalories.text = "Code: $barcodeValue\nProduit non trouvé"
+                                            }
+                                        }
+                                    } catch (e: Exception) {
+                                        withContext(Dispatchers.Main) {
+                                            tvCalories.text = "Erreur réseau"
+                                        }
+                                    }
                                 }
                             })
                         }

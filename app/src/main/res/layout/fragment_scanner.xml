@@ -122,7 +122,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardNutrition"
         android:layout_width="0dp"
-        android:layout_height="120dp"
+        android:layout_height="180dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="90dp"
@@ -138,17 +138,36 @@
             android:layout_height="match_parent"
             android:padding="16dp">
             <!-- Simplified for mock purposes -->
-            <TextView
-                android:id="@+id/tvCalories"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Résultat: 450 cal\nProteines: 30g"
-                android:textAlignment="center"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <EditText
+                    android:id="@+id/etMealName"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_edittext"
+                    android:hint="Nom du plat"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvCalories"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Résultat: 450 cal\nProteines: 30g"
+                    android:textAlignment="center"
+                    android:textColor="#555555"
+                    android:textSize="14sp"
+                    app:layout_constraintTop_toBottomOf="@+id/etMealName" />
+                    
+                <Button
+                    android:id="@+id/btnAddMeal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ajouter ce repas"
+                    app:layout_constraintBottom_toBottomOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

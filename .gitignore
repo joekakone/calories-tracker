@@ -7,6 +7,7 @@
 android-sdk/
 gradle-8.2/
 jdk-17/
+*.apk
 
 
 ### Windows template
