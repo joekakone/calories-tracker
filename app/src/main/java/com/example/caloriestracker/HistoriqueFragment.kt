@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -67,19 +68,36 @@ class HistoriqueFragment : Fragment() {
                     val mealView = layoutInflater.inflate(R.layout.item_meal, llMealsContainer, false)
                     
                     val tvMealName = mealView.findViewById<TextView>(R.id.tvMealName)
-                    val tvMealTypeAndMacros = mealView.findViewById<TextView>(R.id.tvMealTypeAndMacros)
+                    val tvMealType = mealView.findViewById<TextView>(R.id.tvMealType)
                     val tvMealCalories = mealView.findViewById<TextView>(R.id.tvMealCalories)
                     
+                    val tvProteinBadge = mealView.findViewById<TextView>(R.id.tvProteinBadge)
+                    val tvCarbsBadge = mealView.findViewById<TextView>(R.id.tvCarbsBadge)
+                    val tvFatBadge = mealView.findViewById<TextView>(R.id.tvFatBadge)
+                    val ivMealImage = mealView.findViewById<android.widget.ImageView>(R.id.ivMealImage)
+                    
                     tvMealName.text = meal.name
-                    tvMealTypeAndMacros.text = "${meal.mealType} • P:${meal.protein}g G:${meal.carbs}g L:${meal.fat}g"
+                    tvMealType.text = meal.mealType
                     tvMealCalories.text = "${meal.calories} kcal"
+                    
+                    tvProteinBadge.text = "${meal.protein}g"
+                    tvCarbsBadge.text = "${meal.carbs}g"
+                    tvFatBadge.text = "${meal.fat}g"
+                    
+                    if (meal.imageUri != null) {
+                        try {
+                            val uri = android.net.Uri.parse(meal.imageUri)
+                            ivMealImage.setImageURI(uri)
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
+                    }
 
                     mealView.setOnClickListener {
-                        AlertDialog.Builder(requireContext())
-                            .setTitle(meal.name)
-                            .setMessage("Macros complets :\nCalories : ${meal.calories} kcal\nProtéines : ${meal.protein}g\nGlucides : ${meal.carbs}g\nLipides : ${meal.fat}g")
-                            .setPositiveButton("Fermer", null)
-                            .show()
+                        val bundle = Bundle().apply {
+                            putInt("mealId", meal.id)
+                        }
+                        findNavController().navigate(R.id.action_historique_to_detail, bundle)
                     }
                     
                     llMealsContainer.addView(mealView)

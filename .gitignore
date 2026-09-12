@@ -4,12 +4,14 @@
 # Released under a CC-0 License https://creativecommons.org/share-your-work/public-domain/cc0/
 
 # Custom
+releases/
 android-sdk/
 gradle-8.2/
 jdk-17/
 jdk17/
 *.apk
-
+local.properties
+gemini
 
 ### Windows template
 # Windows thumbnail cache files

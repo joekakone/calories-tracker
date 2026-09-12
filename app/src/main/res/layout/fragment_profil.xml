@@ -18,6 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         <TextView
+            android:id="@+id/tvInitials"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -25,9 +26,17 @@
             android:textColor="#0277BD"
             android:textSize="32sp"
             android:textStyle="bold" />
+            
+        <ImageView
+            android:id="@+id/ivProfilePicture"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:visibility="gone" />
     </androidx.cardview.widget.CardView>
 
     <ImageView
+        android:id="@+id/btnChangePhoto"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_marginEnd="-8dp"
@@ -44,7 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Alexandre Martin"
+        android:text=""
         android:textColor="#000000"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -57,7 +66,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="alex@example.com"
+        android:text=""
         android:textColor="#888888"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,19 +93,25 @@
             android:padding="16dp"
             android:layout_marginBottom="16dp">
             <ImageView
+                android:id="@+id/iconEditName"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@android:drawable/ic_menu_edit"
                 app:tint="#03A9F4" />
-            <TextView
+            <EditText
+                android:id="@+id/etEditName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
-                android:text="Modifier le nom"
+                android:background="@null"
+                android:hint="Modifier le nom"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:enabled="false"
+                android:inputType="textPersonName" />
             <ImageView
+                android:id="@+id/btnSaveName"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@android:drawable/ic_media_play"
@@ -113,19 +128,25 @@
             android:padding="16dp"
             android:layout_marginBottom="16dp">
             <ImageView
+                android:id="@+id/iconEditPassword"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@android:drawable/ic_secure"
                 app:tint="#03A9F4" />
-            <TextView
+            <EditText
+                android:id="@+id/etEditPassword"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
-                android:text="Changer mot de passe"
+                android:background="@null"
+                android:hint="Changer mot de passe"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:enabled="false"
+                android:inputType="textPassword" />
             <ImageView
+                android:id="@+id/btnSavePassword"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@android:drawable/ic_media_play"
@@ -142,19 +163,25 @@
             android:padding="16dp"
             android:layout_marginBottom="32dp">
             <ImageView
+                android:id="@+id/iconEditGoal"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@android:drawable/ic_menu_compass"
                 app:tint="#03A9F4" />
-            <TextView
+            <EditText
+                android:id="@+id/etEditGoal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
-                android:text="Objectif calorique (2100)"
+                android:background="@null"
+                android:hint="Objectif calorique (2100)"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:enabled="false"
+                android:inputType="number" />
             <ImageView
+                android:id="@+id/btnSaveGoal"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@android:drawable/ic_media_play"
@@ -163,6 +190,7 @@
 
         <!-- Logout -->
         <LinearLayout
+            android:id="@+id/btnLogoutContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_edittext"
@@ -184,6 +212,33 @@
                 android:textColor="#F44336"
                 android:textSize="16sp" />
         </LinearLayout>
+        
+        <!-- Footer -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:gravity="center"
+            android:orientation="vertical">
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Build n° 5643284"
+                android:textSize="12sp"
+                android:textColor="#999999"/>
+                
+            <TextView
+                android:id="@+id/tvCopyright"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Copyright - Joseph Konka"
+                android:textSize="12sp"
+                android:textColor="#1976D2"
+                android:textStyle="bold"/>
+        </LinearLayout>
+        
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

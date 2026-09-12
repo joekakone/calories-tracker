@@ -1,5 +1,7 @@
 import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Properties
+import java.io.FileInputStream
 
 plugins {
     id("com.android.application")
@@ -10,6 +12,10 @@ plugins {
 android {
     namespace = "com.example.caloriestracker"
     compileSdk = 34
+    
+    buildFeatures {
+        buildConfig = true
+    }
 
     defaultConfig {
         applicationId = "com.example.caloriestracker"
@@ -17,6 +23,14 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
+        
+        val properties = Properties()
+        val localPropertiesFile = rootProject.file("local.properties")
+        if (localPropertiesFile.exists()) {
+            properties.load(FileInputStream(localPropertiesFile))
+        }
+        val geminiApiKey = properties.getProperty("GEMINI_API_KEY", "")
+        buildConfigField("String", "GEMINI_API_KEY", "\"$geminiApiKey\"")
     }
 
     buildTypes {
@@ -75,4 +89,10 @@ dependencies {
     implementation("androidx.room:room-runtime:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
     kapt("androidx.room:room-compiler:$room_version")
+
+    // Image Cropper
+    implementation("com.github.yalantis:ucrop:2.2.8")
+    
+    // Gemini API
+    implementation("com.google.ai.client.generativeai:generativeai:0.7.0")
 }

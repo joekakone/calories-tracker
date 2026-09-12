@@ -80,9 +80,7 @@ class RegisterFragment : Fragment() {
                 
                 withContext(Dispatchers.Main) {
                     Toast.makeText(context, "Inscription réussie !", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_register_to_login) // Usually goes to Dashboard, let's navigate to Dashboard instead.
-                    // Wait, earlier I went to login, but dashboard is better.
-                    findNavController().navigate(R.id.action_register_to_dashboard) // I will need to check if this action exists. If not, I can just use Login action. But I'll stick to action_register_to_login for now. Wait, action_register_to_login is in graph? No, action_register_to_login is likely what was there before. Let's just go to login.
+                    findNavController().navigate(R.id.action_register_to_login) 
                 }
             }
         }

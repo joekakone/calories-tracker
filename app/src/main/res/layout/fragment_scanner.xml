@@ -48,49 +48,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvHeader" />
 
-    <!-- Scanner Overlay (The brackets) -->
-    <View
-        android:id="@+id/scannerOverlay"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:background="@drawable/scanner_brackets"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Barcode toggle button (Right edge) -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/btnToggleBarcode"
-        android:layout_width="90dp"
-        android:layout_height="80dp"
-        app:cardBackgroundColor="#E6FFFFFF"
-        app:cardCornerRadius="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginEnd="-10dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingStart="8dp"
-            android:paddingEnd="16dp">
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@android:drawable/ic_menu_crop"
-                app:tint="#000000" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Scanner un\ncode-barres"
-                android:textAlignment="center"
-                android:textColor="#000000"
-                android:textSize="10sp" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
 
     <!-- Capture Button -->
     <ImageView

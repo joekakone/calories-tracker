@@ -59,7 +59,11 @@
         android:id="@+id/navigation_historique"
         android:name="com.example.caloriestracker.HistoriqueFragment"
         android:label="Historique"
-        tools:layout="@layout/fragment_historique" />
+        tools:layout="@layout/fragment_historique">
+        <action
+            android:id="@+id/action_historique_to_detail"
+            app:destination="@id/navigation_meal_detail" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_exercices"
@@ -83,6 +87,38 @@
         android:id="@+id/navigation_scanner"
         android:name="com.example.caloriestracker.ScannerFragment"
         android:label="Scanner"
-        tools:layout="@layout/fragment_scanner" />
+        tools:layout="@layout/fragment_scanner">
+        <action
+            android:id="@+id/action_scanner_to_meal_summary"
+            app:destination="@id/navigation_meal_summary" />
+    </fragment>
+    
+    <fragment
+        android:id="@+id/navigation_meal_summary"
+        android:name="com.example.caloriestracker.MealSummaryFragment"
+        android:label="Meal Summary"
+        tools:layout="@layout/fragment_meal_summary">
+        <argument
+            android:name="imageUri"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_summary_to_dashboard"
+            app:destination="@id/navigation_dashboard"
+            app:popUpTo="@id/navigation_dashboard"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_summary_to_detail"
+            app:destination="@id/navigation_meal_detail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_meal_detail"
+        android:name="com.example.caloriestracker.MealDetailFragment"
+        android:label="Meal Detail"
+        tools:layout="@layout/fragment_meal_detail">
+        <argument
+            android:name="mealId"
+            app:argType="integer" />
+    </fragment>
 
 </navigation>

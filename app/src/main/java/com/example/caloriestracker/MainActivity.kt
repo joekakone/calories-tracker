@@ -34,7 +34,10 @@ class MainActivity : AppCompatActivity() {
             when (destination.id) {
                 R.id.navigation_splash,
                 R.id.navigation_login,
-                R.id.navigation_register -> {
+                R.id.navigation_register,
+                R.id.navigation_scanner,
+                R.id.navigation_meal_summary,
+                R.id.navigation_meal_detail -> {
                     bottomAppBar.visibility = View.GONE
                     fab.visibility = View.GONE
                 }

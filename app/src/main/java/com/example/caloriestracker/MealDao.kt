@@ -12,6 +12,9 @@ interface MealDao {
     @Query("SELECT * FROM meals WHERE userId = :userId ORDER BY dateTimestamp DESC")
     suspend fun getMealsForUser(userId: Int): List<MealEntity>
 
+    @Query("SELECT * FROM meals WHERE id = :mealId")
+    suspend fun getMealById(mealId: Int): MealEntity?
+
     // Get meals for a specific day could be implemented by filtering timestamps, but for now we'll fetch all or limit
     @Query("SELECT SUM(calories) FROM meals WHERE userId = :userId")
     suspend fun getTotalCaloriesForUser(userId: Int): Int?

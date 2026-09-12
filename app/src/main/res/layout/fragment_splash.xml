@@ -9,13 +9,13 @@
         android:id="@+id/ivLogo"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:background="@drawable/bg_rounded_white"
-        android:padding="16dp"
-        android:src="@android:drawable/ic_menu_sort_by_size"
+        android:src="@drawable/logo_calories_tracker"
+        android:alpha="0"
         app:layout_constraintBottom_toTopOf="@+id/tvAppName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
@@ -25,11 +25,27 @@
         android:layout_marginTop="24dp"
         android:text="Calories Tracker"
         android:textColor="#FFFFFF"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="32sp"
+        android:fontFamily="@font/poppins_bold"
+        android:alpha="0"
+        app:layout_constraintBottom_toTopOf="@+id/tvSlogan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
+
+    <TextView
+        android:id="@+id/tvSlogan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Votre santé, sous contrôle"
+        android:textColor="#E0E0E0"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins"
+        android:alpha="0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvAppName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,5 +10,6 @@ data class UserEntity(
     val name: String,
     val email: String,
     val passwordHash: String,
-    val dailyCalorieGoal: Int = 2100
+    val dailyCalorieGoal: Int = 2100,
+    val profilePictureUri: String? = null
 )
