@@ -3,15 +3,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#151A2C">
+    android:background="@drawable/bg_auth_header">
+
+    <!-- Header Text -->
+    <TextView
+        android:id="@+id/tvAppTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="CaloriesTracker"
+        android:textColor="@color/primary_green"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvHeaderSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Créer un profil sain"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvAppTitle" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/bg_top_rounded_white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/tvHeaderSubtitle">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -27,48 +54,38 @@
                     android:id="@+id/tvRegisterTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:fontFamily="@font/poppins_bold"
                     android:text="Créer un Compte"
-                    android:textColor="#000000"
+                    android:textColor="@color/text_title"
                     android:textSize="28sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/tvSubtitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/poppins"
-                    android:text="Commencez votre suivi dès maintenant."
-                    android:textColor="#888888"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvRegisterTitle" />
-
-                <TextView
                     android:id="@+id/tvNameLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="32dp"
                     android:text="Nom Complet"
-                    android:textColor="#555555"
+                    android:textColor="@color/text_title"
                     android:textSize="14sp"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/poppins"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvSubtitle" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvRegisterTitle" />
 
                 <EditText
                     android:id="@+id/etName"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="54dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_edittext"
+                    android:background="@drawable/bg_input"
                     android:hint="Alexandre Martin"
                     android:inputType="textPersonName"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
-                    android:textColor="#333333"
+                    android:textColor="@color/text_title"
+                    android:textColorHint="@color/text_placeholder"
                     android:textSize="14sp"
                     app:layout_constraintTop_toBottomOf="@+id/tvNameLabel" />
 
@@ -76,25 +93,26 @@
                     android:id="@+id/tvEmailLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="24dp"
                     android:text="Email"
-                    android:textColor="#555555"
+                    android:textColor="@color/text_title"
                     android:textSize="14sp"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/poppins"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/etName" />
 
                 <EditText
                     android:id="@+id/etEmail"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="54dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_edittext"
+                    android:background="@drawable/bg_input"
                     android:hint="alex@exemple.fr"
                     android:inputType="textEmailAddress"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
-                    android:textColor="#333333"
+                    android:textColor="@color/text_title"
+                    android:textColorHint="@color/text_placeholder"
                     android:textSize="14sp"
                     app:layout_constraintTop_toBottomOf="@+id/tvEmailLabel" />
 
@@ -102,25 +120,26 @@
                     android:id="@+id/tvPasswordLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="24dp"
                     android:text="Nouveau mot de passe"
-                    android:textColor="#555555"
+                    android:textColor="@color/text_title"
                     android:textSize="14sp"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/poppins"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/etEmail" />
 
                 <EditText
                     android:id="@+id/etPassword"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="54dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_edittext"
+                    android:background="@drawable/bg_input"
                     android:hint="8+ caractères, 1 chiffre"
                     android:inputType="textPassword"
                     android:paddingStart="16dp"
                     android:paddingEnd="48dp"
-                    android:textColor="#333333"
+                    android:textColor="@color/text_title"
+                    android:textColorHint="@color/text_placeholder"
                     android:textSize="14sp"
                     app:layout_constraintTop_toBottomOf="@+id/tvPasswordLabel" />
 
@@ -132,31 +151,32 @@
                     app:layout_constraintBottom_toBottomOf="@+id/etPassword"
                     app:layout_constraintEnd_toEndOf="@+id/etPassword"
                     app:layout_constraintTop_toTopOf="@+id/etPassword"
-                    app:tint="#888888" />
+                    app:tint="@color/text_placeholder" />
 
                 <TextView
                     android:id="@+id/tvPasswordConfirmLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="24dp"
                     android:text="Confirmer le mot de passe"
-                    android:textColor="#555555"
+                    android:textColor="@color/text_title"
                     android:textSize="14sp"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/poppins"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
                 <EditText
                     android:id="@+id/etPasswordConfirm"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="54dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_edittext"
+                    android:background="@drawable/bg_input"
                     android:hint="Confirmer"
                     android:inputType="textPassword"
                     android:paddingStart="16dp"
                     android:paddingEnd="48dp"
-                    android:textColor="#333333"
+                    android:textColor="@color/text_title"
+                    android:textColorHint="@color/text_placeholder"
                     android:textSize="14sp"
                     app:layout_constraintTop_toBottomOf="@+id/tvPasswordConfirmLabel" />
 
@@ -168,20 +188,20 @@
                     app:layout_constraintBottom_toBottomOf="@+id/etPasswordConfirm"
                     app:layout_constraintEnd_toEndOf="@+id/etPasswordConfirm"
                     app:layout_constraintTop_toTopOf="@+id/etPasswordConfirm"
-                    app:tint="#888888" />
+                    app:tint="@color/text_placeholder" />
 
                 <Button
                     android:id="@+id/btnRegister"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="24dp"
-                    android:backgroundTint="#10B981"
+                    android:layout_height="54dp"
+                    android:layout_marginTop="32dp"
+                    android:background="@drawable/btn_primary_green"
                     android:text="S'inscrire"
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:cornerRadius="12dp"
+                    android:fontFamily="@font/poppins_bold"
+                    app:backgroundTint="@null"
                     app:layout_constraintTop_toBottomOf="@+id/etPasswordConfirm" />
 
                 <TextView
@@ -191,9 +211,9 @@
                     android:layout_marginTop="24dp"
                     android:layout_marginBottom="16dp"
                     android:text="Déjà un compte ? Se connecter"
-                    android:textColor="#0284C7"
+                    android:textColor="@color/primary_blue"
                     android:textSize="14sp"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/poppins"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

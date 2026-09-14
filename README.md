@@ -22,6 +22,27 @@ Calories Tracker est une application Android intelligente conçue pour vous aide
 *   **UI/UX** : XML Layouts avec Material Design Components
 *   **Architecture** : Navigation Component (Single Activity, Multiple Fragments)
 
+## 🗄️ Structure de la Base de Données
+
+L'application utilise **Room** (SQLite) pour stocker les données localement. L'entité principale pour les repas est `MealEntity`, stockée dans la table `meals`.
+
+### Table `meals`
+
+| Champ | Type | Description |
+| :--- | :--- | :--- |
+| `id` | `Int` | Clé primaire (auto-incrémentée) |
+| `userId` | `Int` | Identifiant de l'utilisateur ayant enregistré le repas |
+| `name` | `String` | Nom du plat (ex: "Salade César") |
+| `mealType` | `String` | Type de repas (ex: "Petit déjeuner", "Snack") |
+| `calories` | `Int` | Nombre total de calories |
+| `carbs` | `Int` | Glucides en grammes |
+| `protein` | `Int` | Protéines en grammes |
+| `fat` | `Int` | Lipides en grammes |
+| `dateTimestamp` | `Long` | Timestamp de l'enregistrement du repas |
+| `imageUri` | `String?` | Chemin local de l'image du repas (URI) |
+| `healthBadge` | `String?` | Badge santé attribué (ex: "Bonne bouffe") |
+| `ingredients` | `String?` | Liste des ingrédients sérialisée au format JSON |
+
 ## 🛠️ Configuration & Installation
 
 1.  **Cloner le dépôt** :

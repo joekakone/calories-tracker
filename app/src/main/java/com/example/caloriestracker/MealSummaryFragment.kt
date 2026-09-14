@@ -59,9 +59,9 @@ class MealSummaryFragment : Fragment() {
         btnBack = view.findViewById(R.id.btnBack)
         etMealName = view.findViewById(R.id.etMealName)
         tvCalories = view.findViewById(R.id.tvCalories)
-        tvProtein = view.findViewById(R.id.tvProtein)
-        tvCarbs = view.findViewById(R.id.tvCarbs)
-        tvFat = view.findViewById(R.id.tvFat)
+        tvProtein = view.findViewById(R.id.tvProteinValue)
+        tvCarbs = view.findViewById(R.id.tvCarbsValue)
+        tvFat = view.findViewById(R.id.tvFatValue)
         tvDescription = view.findViewById(R.id.tvDescription)
         tvBadge = view.findViewById(R.id.tvBadge)
         btnAddMeal = view.findViewById(R.id.btnAddMeal)
@@ -175,15 +175,16 @@ class MealSummaryFragment : Fragment() {
                         fat = fatResult,
                         imageUri = imageUriStr,
                         healthBadge = badgeResult,
-                        ingredients = ingredientsJsonStr
+                        ingredients = ingredientsJsonStr,
+                        description = description
                     )
 
                     withContext(Dispatchers.Main) {
                         etMealName.setText(name)
                         tvCalories.text = "$caloriesResult kcal"
-                        tvProtein.text = "Protéines: ${proteinResult}g"
-                        tvCarbs.text = "Glucides: ${carbsResult}g"
-                        tvFat.text = "Lipides: ${fatResult}g"
+                        tvProtein.text = "${proteinResult}g"
+                        tvCarbs.text = "${carbsResult}g"
+                        tvFat.text = "${fatResult}g"
                         tvDescription.text = description
                         tvBadge.text = badgeResult
                         
@@ -214,14 +215,15 @@ class MealSummaryFragment : Fragment() {
             val meal = scannedMeal ?: MealEntity(
                 userId = userId,
                 name = etMealName.text.toString(),
-                mealType = "Déjeuner", // Default for now
+                mealType = "Snack", // Default for now
                 calories = caloriesResult,
                 protein = proteinResult,
                 carbs = carbsResult,
                 fat = fatResult,
                 imageUri = imageUriStr,
                 healthBadge = badgeResult,
-                ingredients = ingredientsJsonStr
+                ingredients = ingredientsJsonStr,
+                description = tvDescription.text.toString()
             )
             
             CoroutineScope(Dispatchers.IO).launch {

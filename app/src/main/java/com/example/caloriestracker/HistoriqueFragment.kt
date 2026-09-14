@@ -22,9 +22,9 @@ import java.util.Locale
 
 class HistoriqueFragment : Fragment() {
 
-    private lateinit var tvDate: TextView
+    private lateinit var tvHistoryTitle: TextView
+    private lateinit var tvHistorySubtitle: TextView
     private lateinit var tvTotalKcal: TextView
-    private lateinit var tvGreeting: TextView
     private lateinit var llMealsContainer: LinearLayout
 
     override fun onCreateView(
@@ -33,9 +33,9 @@ class HistoriqueFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_historique, container, false)
         
-        tvDate = view.findViewById(R.id.tvDate)
+        tvHistoryTitle = view.findViewById(R.id.tvHistoryTitle)
+        tvHistorySubtitle = view.findViewById(R.id.tvHistorySubtitle)
         tvTotalKcal = view.findViewById(R.id.tvTotalKcal)
-        tvGreeting = view.findViewById(R.id.tvGreeting)
         llMealsContainer = view.findViewById(R.id.llMealsContainer)
 
         loadHistory()
@@ -55,13 +55,8 @@ class HistoriqueFragment : Fragment() {
             val totalCals = meals.sumOf { it.calories }
 
             withContext(Dispatchers.Main) {
-                user?.let {
-                    tvGreeting.text = "Bonjour, ${it.name} !"
-                }
-                
-                val sdf = SimpleDateFormat("dd MMM.", Locale.getDefault())
-                tvDate.text = "Aujourd'hui, ${sdf.format(Date())}"
-                tvTotalKcal.text = "$totalCals\nkcal"
+                // Static titles set in XML
+                tvTotalKcal.text = "$totalCals kcal"
 
                 llMealsContainer.removeAllViews()
                 meals.forEach { meal ->
@@ -80,14 +75,58 @@ class HistoriqueFragment : Fragment() {
                     tvMealType.text = meal.mealType
                     tvMealCalories.text = "${meal.calories} kcal"
                     
-                    tvProteinBadge.text = "${meal.protein}g"
-                    tvCarbsBadge.text = "${meal.carbs}g"
-                    tvFatBadge.text = "${meal.fat}g"
+                    tvCarbsBadge.text = "G: ${meal.carbs}g"
+                    tvProteinBadge.text = "P: ${meal.protein}g"
+                    tvFatBadge.text = "L: ${meal.fat}g"
                     
                     if (meal.imageUri != null) {
                         try {
                             val uri = android.net.Uri.parse(meal.imageUri)
-                            ivMealImage.setImageURI(uri)
+                            
+                            // Load image on background thread to prevent UI lag
+                            CoroutineScope(Dispatchers.IO).launch {
+                                try {
+                                    val context = context ?: return@launch
+                                    val contentResolver = context.contentResolver
+                                    
+                                    // Decode bounds first to calculate inSampleSize
+                                    var inputStream = contentResolver.openInputStream(uri)
+                                    val options = android.graphics.BitmapFactory.Options().apply {
+                                        inJustDecodeBounds = true
+                                    }
+                                    android.graphics.BitmapFactory.decodeStream(inputStream, null, options)
+                                    inputStream?.close()
+                                    
+                                    // Target size around 150x150
+                                    val reqWidth = 150
+                                    val reqHeight = 150
+                                    var inSampleSize = 1
+                                    
+                                    if (options.outHeight > reqHeight || options.outWidth > reqWidth) {
+                                        val halfHeight: Int = options.outHeight / 2
+                                        val halfWidth: Int = options.outWidth / 2
+                                        while (halfHeight / inSampleSize >= reqHeight && halfWidth / inSampleSize >= reqWidth) {
+                                            inSampleSize *= 2
+                                        }
+                                    }
+                                    
+                                    // Decode actual bitmap
+                                    val decodeOptions = android.graphics.BitmapFactory.Options().apply {
+                                        this.inSampleSize = inSampleSize
+                                    }
+                                    inputStream = contentResolver.openInputStream(uri)
+                                    val bitmap = android.graphics.BitmapFactory.decodeStream(inputStream, null, decodeOptions)
+                                    inputStream?.close()
+                                    
+                                    if (bitmap != null) {
+                                        withContext(Dispatchers.Main) {
+                                            ivMealImage.setImageBitmap(bitmap)
+                                        }
+                                    }
+                                } catch (e: Exception) {
+                                    e.printStackTrace()
+                                }
+                            }
                         } catch (e: Exception) {
                             e.printStackTrace()
                         }

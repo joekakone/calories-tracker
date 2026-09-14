@@ -3,64 +3,80 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#151A2C">
+    android:background="@drawable/bg_auth_header">
+
+    <!-- Header Text -->
+    <TextView
+        android:id="@+id/tvAppTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="CaloriesTracker"
+        android:textColor="@color/primary_green"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvHeaderSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Ravi de vous revoir"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvAppTitle" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/bg_top_rounded_white"
-        android:padding="32dp"
+        android:padding="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/tvHeaderSubtitle">
 
         <TextView
             android:id="@+id/tvLoginTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/poppins_bold"
             android:text="Se Connecter"
-            android:textColor="#000000"
+            android:textColor="@color/text_title"
             android:textSize="28sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvSubtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/poppins"
-            android:text="Bienvenue ! Suivez vos calories au quotidien."
-            android:textColor="#888888"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvLoginTitle" />
 
         <TextView
             android:id="@+id/tvEmailLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Email"
-            android:textColor="#555555"
+            android:text="Adresse Email"
+            android:textColor="@color/text_title"
             android:textSize="14sp"
-            android:textStyle="bold"
+            android:fontFamily="@font/poppins"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvSubtitle" />
+            app:layout_constraintTop_toBottomOf="@+id/tvLoginTitle" />
 
         <EditText
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="54dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/bg_edittext"
+            android:background="@drawable/bg_input"
             android:hint="alex@example.com"
             android:inputType="textEmailAddress"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:textColor="#333333"
+            android:textColor="@color/text_title"
+            android:textColorHint="@color/text_placeholder"
             android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@+id/tvEmailLabel" />
 
@@ -68,25 +84,26 @@
             android:id="@+id/tvPasswordLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:text="Mot de passe"
-            android:textColor="#555555"
+            android:textColor="@color/text_title"
             android:textSize="14sp"
-            android:textStyle="bold"
+            android:fontFamily="@font/poppins"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etEmail" />
 
         <EditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="54dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/bg_edittext"
+            android:background="@drawable/bg_input"
             android:hint="••••••••••"
             android:inputType="textPassword"
             android:paddingStart="16dp"
             android:paddingEnd="48dp"
-            android:textColor="#333333"
+            android:textColor="@color/text_title"
+            android:textColorHint="@color/text_placeholder"
             android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@+id/tvPasswordLabel" />
 
@@ -98,46 +115,46 @@
             app:layout_constraintBottom_toBottomOf="@+id/etPassword"
             app:layout_constraintEnd_toEndOf="@+id/etPassword"
             app:layout_constraintTop_toTopOf="@+id/etPassword"
-            app:tint="#888888" />
-
-        <Button
-            android:id="@+id/btnLogin"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="24dp"
-            android:backgroundTint="#0284C7"
-            android:text="Connexion"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:cornerRadius="12dp"
-            app:layout_constraintTop_toBottomOf="@+id/etPassword" />
+            app:tint="@color/text_placeholder" />
 
         <TextView
             android:id="@+id/tvForgotPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="Mot de passe oublié ?"
-            android:textColor="#0284C7"
+            android:textColor="@color/primary_blue"
             android:textSize="14sp"
+            android:fontFamily="@font/poppins_bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+            app:layout_constraintTop_toBottomOf="@+id/etPassword" />
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/btn_primary_blue"
+            android:text="Connexion"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:fontFamily="@font/poppins_bold"
+            app:backgroundTint="@null"
+            app:layout_constraintTop_toBottomOf="@+id/tvForgotPassword" />
 
         <TextView
             android:id="@+id/tvRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:text="Pas de compte ? S'inscrire"
-            android:textColor="#0284C7"
+            android:textColor="@color/primary_blue"
             android:textSize="14sp"
-            android:textStyle="bold"
+            android:fontFamily="@font/poppins"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvForgotPassword" />
+            app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

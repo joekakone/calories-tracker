@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:background="@drawable/bg_card_surface"
+    android:padding="16dp">
+    
+    <ImageView
+        android:id="@+id/iconWorkout"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_pill"
+        android:backgroundTint="#FFECEF"
+        android:padding="12dp"
+        android:src="@drawable/ic_walk_icon"
+        app:tint="#F44336"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+        
+    <TextView
+        android:id="@+id/tvWorkoutTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Marche Rapide"
+        android:textColor="@color/text_title"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_bold"
+        app:layout_constraintStart_toEndOf="@id/iconWorkout"
+        app:layout_constraintTop_toTopOf="@id/iconWorkout"
+        app:layout_constraintEnd_toStartOf="@id/tvCalories" />
+        
+    <TextView
+        android:id="@+id/tvWorkoutDetails"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:text="45 min • 5 400 pas"
+        android:textColor="@color/text_subtitle"
+        android:textSize="12sp"
+        android:fontFamily="@font/poppins"
+        app:layout_constraintStart_toEndOf="@id/iconWorkout"
+        app:layout_constraintTop_toBottomOf="@+id/tvWorkoutTitle"
+        app:layout_constraintEnd_toStartOf="@id/tvCalories" />
+        
+    <TextView
+        android:id="@+id/tvCalories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-180\nkcal"
+        android:textAlignment="center"
+        android:textColor="#F44336"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

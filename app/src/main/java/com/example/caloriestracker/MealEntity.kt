@@ -17,5 +17,6 @@ data class MealEntity(
     val dateTimestamp: Long = System.currentTimeMillis(),
     val imageUri: String? = null,
     val healthBadge: String? = null, // e.g., "Bonne bouffe", "Mal bouffe"
-    val ingredients: String? = null // JSON string of ingredients
+    val ingredients: String? = null, // JSON string of ingredients
+    val description: String? = null
 )

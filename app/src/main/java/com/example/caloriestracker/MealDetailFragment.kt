@@ -25,6 +25,7 @@ class MealDetailFragment : Fragment() {
     private lateinit var btnBack: ImageView
     private lateinit var tvMealType: TextView
     private lateinit var tvMealName: TextView
+    private lateinit var tvMealDescription: TextView
     private lateinit var tvServings: TextView
     private lateinit var tvTotalCalories: TextView
     
@@ -44,6 +45,7 @@ class MealDetailFragment : Fragment() {
         btnBack = view.findViewById(R.id.btnBack)
         tvMealType = view.findViewById(R.id.tvMealType)
         tvMealName = view.findViewById(R.id.tvMealName)
+        tvMealDescription = view.findViewById(R.id.tvMealDescription)
         tvServings = view.findViewById(R.id.tvServings)
         tvTotalCalories = view.findViewById(R.id.tvTotalCalories)
         
@@ -53,7 +55,11 @@ class MealDetailFragment : Fragment() {
         
         llIngredientsContainer = view.findViewById(R.id.llIngredientsContainer)
         
-        btnBack.setOnClickListener { findNavController().navigate(R.id.navigation_dashboard) }
+        btnBack.setOnClickListener { 
+            if (!findNavController().popBackStack(R.id.navigation_historique, false)) {
+                findNavController().navigate(R.id.navigation_historique)
+            }
+        }
         
         val mealId = arguments?.getInt("mealId", -1) ?: -1
         
@@ -72,6 +78,8 @@ class MealDetailFragment : Fragment() {
             meal?.let { loadedMeal ->
                 withContext(Dispatchers.Main) {
                     tvMealName.text = loadedMeal.name
+                    tvMealDescription.text = loadedMeal.description ?: ""
+                    tvMealDescription.visibility = if (loadedMeal.description.isNullOrEmpty()) View.GONE else View.VISIBLE
                     tvMealType.text = loadedMeal.mealType
                     tvTotalCalories.text = "${loadedMeal.calories} Kcal"
                     tvCarbsValue.text = "${loadedMeal.carbs}gr"

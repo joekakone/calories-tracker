@@ -15,6 +15,11 @@
             app:destination="@id/navigation_login"
             app:popUpTo="@id/navigation_splash"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splash_to_dashboard"
+            app:destination="@id/navigation_dashboard"
+            app:popUpTo="@id/navigation_splash"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -53,7 +58,11 @@
         android:id="@+id/navigation_dashboard"
         android:name="com.example.caloriestracker.DashboardFragment"
         android:label="Dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/action_dashboard_to_notifications"
+            app:destination="@id/navigation_notifications" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_historique"
@@ -69,7 +78,14 @@
         android:id="@+id/navigation_exercices"
         android:name="com.example.caloriestracker.ExercicesFragment"
         android:label="Exercices"
-        tools:layout="@layout/fragment_exercices" />
+        tools:layout="@layout/fragment_exercices">
+        <action
+            android:id="@+id/action_exercices_to_workout_map"
+            app:destination="@id/navigation_workout_map" />
+        <action
+            android:id="@+id/action_exercices_to_workout_details"
+            app:destination="@id/workoutDetailsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_profil"
@@ -119,6 +135,34 @@
         <argument
             android:name="mealId"
             app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.example.caloriestracker.NotificationsFragment"
+        android:label="Notifications"
+        tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_workout_map"
+        android:name="com.example.caloriestracker.WorkoutMapFragment"
+        android:label="Workout Map"
+        tools:layout="@layout/fragment_workout_map">
+        <argument
+            android:name="workoutType"
+            app:argType="string"
+            android:defaultValue="Marche" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/workoutDetailsFragment"
+        android:name="com.example.caloriestracker.WorkoutDetailsFragment"
+        android:label="Workout Details"
+        tools:layout="@layout/fragment_workout_details">
+        <argument
+            android:name="workoutId"
+            app:argType="long"
+            android:defaultValue="-1L" />
     </fragment>
 
 </navigation>

@@ -95,4 +95,12 @@ dependencies {
     
     // Gemini API
     implementation("com.google.ai.client.generativeai:generativeai:0.7.0")
+    
+    // MPAndroidChart
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    
+    // Location & Maps
+    implementation("com.google.android.gms:play-services-location:21.1.0")
+    implementation("org.osmdroid:osmdroid-android:6.1.18")
+    implementation("androidx.preference:preference-ktx:1.2.1")
 }

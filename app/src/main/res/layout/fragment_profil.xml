@@ -11,7 +11,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="48dp"
-        app:cardBackgroundColor="#E1F5FE"
+        app:cardBackgroundColor="#E3F2FD"
         app:cardCornerRadius="50dp"
         app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,10 +22,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="AM"
-            android:textColor="#0277BD"
+            android:text="JK"
+            android:textColor="@color/primary_blue"
             android:textSize="32sp"
-            android:textStyle="bold" />
+            android:fontFamily="@font/poppins_bold" />
             
         <ImageView
             android:id="@+id/ivProfilePicture"
@@ -43,7 +43,7 @@
         android:layout_marginBottom="-8dp"
         android:background="@drawable/bg_rounded_white"
         android:padding="6dp"
-        android:src="@android:drawable/ic_menu_camera"
+        android:src="@drawable/ic_camera_lite"
         app:tint="#4CAF50"
         app:layout_constraintBottom_toBottomOf="@+id/cvAvatar"
         app:layout_constraintEnd_toEndOf="@+id/cvAvatar" />
@@ -53,10 +53,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text=""
-        android:textColor="#000000"
+        android:text="Joe Kakone"
+        android:textColor="@color/text_title"
         android:textSize="22sp"
-        android:textStyle="bold"
+        android:fontFamily="@font/poppins_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cvAvatar" />
@@ -66,9 +66,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text=""
-        android:textColor="#888888"
+        android:text="joe@kakone.com"
+        android:textColor="@color/text_subtitle"
         android:textSize="14sp"
+        android:fontFamily="@font/poppins"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvProfileName" />
@@ -83,160 +84,297 @@
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/tvProfileEmail">
 
-        <!-- Edit Name -->
+        <!-- Mettre à jour mes informations -->
         <LinearLayout
+            android:id="@+id/btnUpdateInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_edittext"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="16dp"
-            android:layout_marginBottom="16dp">
-            <ImageView
-                android:id="@+id/iconEditName"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@android:drawable/ic_menu_edit"
-                app:tint="#03A9F4" />
-            <EditText
-                android:id="@+id/etEditName"
+            android:background="?android:attr/selectableItemBackground"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp">
+            
+            <FrameLayout
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_outline_rounded">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_profile"
+                    app:tint="#161C3B" />
+            </FrameLayout>
+            
+            <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
-                android:background="@null"
-                android:hint="Modifier le nom"
-                android:textColor="#000000"
+                android:text="Mettre à jour mes informations"
+                android:textColor="#161C3B"
                 android:textSize="16sp"
-                android:enabled="false"
-                android:inputType="textPersonName" />
+                android:fontFamily="@font/poppins_bold" />
+                
             <ImageView
-                android:id="@+id/btnSaveName"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@android:drawable/ic_media_play"
-                app:tint="#CCCCCC" />
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_chevron_right"
+                app:tint="#161C3B" />
         </LinearLayout>
+        
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#F0F0F0"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
 
-        <!-- Change Password -->
+        <!-- Sécurité -->
         <LinearLayout
+            android:id="@+id/btnSecurity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_edittext"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="16dp"
-            android:layout_marginBottom="16dp">
-            <ImageView
-                android:id="@+id/iconEditPassword"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@android:drawable/ic_secure"
-                app:tint="#03A9F4" />
-            <EditText
-                android:id="@+id/etEditPassword"
+            android:background="?android:attr/selectableItemBackground"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp">
+            
+            <FrameLayout
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_outline_rounded">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@android:drawable/ic_secure"
+                    app:tint="#161C3B" />
+            </FrameLayout>
+            
+            <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
-                android:background="@null"
-                android:hint="Changer mot de passe"
-                android:textColor="#000000"
+                android:text="Sécurité"
+                android:textColor="#161C3B"
                 android:textSize="16sp"
-                android:enabled="false"
-                android:inputType="textPassword" />
+                android:fontFamily="@font/poppins_bold" />
+                
             <ImageView
-                android:id="@+id/btnSavePassword"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@android:drawable/ic_media_play"
-                app:tint="#CCCCCC" />
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_chevron_right"
+                app:tint="#161C3B" />
         </LinearLayout>
+        
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#F0F0F0"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
 
-        <!-- Goal -->
+        <!-- Mes préférences -->
         <LinearLayout
+            android:id="@+id/btnPreferences"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_edittext"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="16dp"
-            android:layout_marginBottom="32dp">
-            <ImageView
-                android:id="@+id/iconEditGoal"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@android:drawable/ic_menu_compass"
-                app:tint="#03A9F4" />
-            <EditText
-                android:id="@+id/etEditGoal"
+            android:background="?android:attr/selectableItemBackground"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp">
+            
+            <FrameLayout
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_outline_rounded">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@android:drawable/ic_menu_preferences"
+                    app:tint="#161C3B" />
+            </FrameLayout>
+            
+            <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
-                android:background="@null"
-                android:hint="Objectif calorique (2100)"
-                android:textColor="#000000"
+                android:text="Mes préférences"
+                android:textColor="#161C3B"
                 android:textSize="16sp"
-                android:enabled="false"
-                android:inputType="number" />
+                android:fontFamily="@font/poppins_bold" />
+                
             <ImageView
-                android:id="@+id/btnSaveGoal"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@android:drawable/ic_media_play"
-                app:tint="#CCCCCC" />
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_chevron_right"
+                app:tint="#161C3B" />
         </LinearLayout>
+        
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#F0F0F0"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Aide et support -->
+        <LinearLayout
+            android:id="@+id/btnHelpSupport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:background="?android:attr/selectableItemBackground"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp">
+            
+            <FrameLayout
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_outline_rounded">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@android:drawable/ic_menu_help"
+                    app:tint="#161C3B" />
+            </FrameLayout>
+            
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:text="Aide et support"
+                android:textColor="#161C3B"
+                android:textSize="16sp"
+                android:fontFamily="@font/poppins_bold" />
+                
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_chevron_right"
+                app:tint="#161C3B" />
+        </LinearLayout>
+        
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#F0F0F0"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
+            
+        <!-- À propos de nous -->
+        <LinearLayout
+            android:id="@+id/btnAbout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:background="?android:attr/selectableItemBackground"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp">
+            
+            <FrameLayout
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_outline_rounded">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@android:drawable/ic_menu_info_details"
+                    app:tint="#161C3B" />
+            </FrameLayout>
+            
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:text="À propos de nous"
+                android:textColor="#161C3B"
+                android:textSize="16sp"
+                android:fontFamily="@font/poppins_bold" />
+                
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_chevron_right"
+                app:tint="#161C3B" />
+        </LinearLayout>
+        
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#F0F0F0"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
 
         <!-- Logout -->
         <LinearLayout
             android:id="@+id/btnLogoutContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_edittext"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="16dp">
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@android:drawable/ic_menu_revert"
-                app:tint="#F44336" />
+            android:background="?android:attr/selectableItemBackground"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp">
+            
+            <FrameLayout
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_outline_rounded_red">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@android:drawable/ic_menu_revert"
+                    app:tint="#F44336" />
+            </FrameLayout>
+            
             <TextView
                 android:id="@+id/tvLogout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
-                android:text="Déconnexion"
+                android:text="Se déconnecter"
                 android:textColor="#F44336"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:fontFamily="@font/poppins_bold" />
+                
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_chevron_right"
+                app:tint="#F44336" />
         </LinearLayout>
         
         <!-- Footer -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="48dp"
             android:gravity="center"
             android:orientation="vertical">
             
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Build n° 5643284"
+                android:text="Version 5.3.1"
                 android:textSize="12sp"
-                android:textColor="#999999"/>
-                
-            <TextView
-                android:id="@+id/tvCopyright"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Copyright - Joseph Konka"
-                android:textSize="12sp"
-                android:textColor="#1976D2"
-                android:textStyle="bold"/>
+                android:fontFamily="@font/poppins"
+                android:textColor="#6C757D"/>
         </LinearLayout>
         
     </LinearLayout>

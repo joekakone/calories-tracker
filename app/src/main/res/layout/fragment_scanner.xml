@@ -27,11 +27,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:layout_marginStart="24dp"
         android:text="Ajouter un Plat"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="@font/poppins_bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,27 +39,26 @@
         android:id="@+id/tvSubtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Visez un plat pour\nl'analyse photo..."
-        android:textAlignment="center"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="24dp"
+        android:text="Visez un plat pour l'analyse photo..."
+        android:textAlignment="viewStart"
         android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvHeader" />
-
-
 
     <!-- Capture Button -->
     <ImageView
         android:id="@+id/btnCapture"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/bg_rounded_white"
-        android:padding="16dp"
-        android:src="@android:drawable/ic_menu_camera"
-        app:tint="#000000"
+        android:padding="24dp"
+        android:src="@drawable/ic_camera_lite"
+        app:tint="#666666"
         app:layout_constraintBottom_toTopOf="@+id/tvCaptureInstruction"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -72,6 +71,7 @@
         android:text="Appuyez pour capturer et analyser"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
+        android:fontFamily="@font/poppins"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -100,13 +100,14 @@
                     android:id="@+id/etMealName"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:background="@drawable/bg_edittext"
+                    android:background="@drawable/bg_input"
                     android:hint="Nom du plat"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
-                    android:textColor="#000000"
+                    android:textColor="@color/text_title"
+                    android:textColorHint="@color/text_placeholder"
                     android:textSize="16sp"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/poppins_bold"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -116,15 +117,22 @@
                     android:layout_marginTop="8dp"
                     android:text="Résultat: 450 cal\nProteines: 30g"
                     android:textAlignment="center"
-                    android:textColor="#555555"
+                    android:textColor="@color/text_subtitle"
                     android:textSize="14sp"
+                    android:fontFamily="@font/poppins"
                     app:layout_constraintTop_toBottomOf="@+id/etMealName" />
                     
                 <Button
                     android:id="@+id/btnAddMeal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/btn_primary_green"
+                    app:backgroundTint="@null"
                     android:text="Ajouter ce repas"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/poppins_bold"
                     app:layout_constraintBottom_toBottomOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

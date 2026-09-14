@@ -39,21 +39,14 @@ class ProfilFragment : Fragment() {
     private lateinit var ivProfilePicture: ImageView
     private lateinit var btnChangePhoto: ImageView
     
-    // Inline editing elements
-    private lateinit var iconEditName: ImageView
-    private lateinit var etEditName: EditText
-    private lateinit var btnSaveName: ImageView
-    
-    private lateinit var iconEditPassword: ImageView
-    private lateinit var etEditPassword: EditText
-    private lateinit var btnSavePassword: ImageView
-    
-    private lateinit var iconEditGoal: ImageView
-    private lateinit var etEditGoal: EditText
-    private lateinit var btnSaveGoal: ImageView
+    // New Menu Buttons
+    private lateinit var btnUpdateInfo: LinearLayout
+    private lateinit var btnSecurity: LinearLayout
+    private lateinit var btnPreferences: LinearLayout
+    private lateinit var btnHelpSupport: LinearLayout
+    private lateinit var btnAbout: LinearLayout
     
     private lateinit var btnLogoutContainer: LinearLayout
-    private lateinit var tvCopyright: TextView
 
     private var currentUserId: Int = -1
     private var currentUser: UserEntity? = null
@@ -83,6 +76,14 @@ class ProfilFragment : Fragment() {
         }
     }
 
+    private val requestCameraPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+        if (isGranted) {
+            takePictureLauncher.launch(null)
+        } else {
+            Toast.makeText(requireContext(), "Permission de la caméra refusée", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private val pickGalleryLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         if (uri != null) {
             launchUCrop(uri)
@@ -101,20 +102,13 @@ class ProfilFragment : Fragment() {
         ivProfilePicture = view.findViewById(R.id.ivProfilePicture)
         btnChangePhoto = view.findViewById(R.id.btnChangePhoto)
         
-        iconEditName = view.findViewById(R.id.iconEditName)
-        etEditName = view.findViewById(R.id.etEditName)
-        btnSaveName = view.findViewById(R.id.btnSaveName)
-        
-        iconEditPassword = view.findViewById(R.id.iconEditPassword)
-        etEditPassword = view.findViewById(R.id.etEditPassword)
-        btnSavePassword = view.findViewById(R.id.btnSavePassword)
-        
-        iconEditGoal = view.findViewById(R.id.iconEditGoal)
-        etEditGoal = view.findViewById(R.id.etEditGoal)
-        btnSaveGoal = view.findViewById(R.id.btnSaveGoal)
+        btnUpdateInfo = view.findViewById(R.id.btnUpdateInfo)
+        btnSecurity = view.findViewById(R.id.btnSecurity)
+        btnPreferences = view.findViewById(R.id.btnPreferences)
+        btnHelpSupport = view.findViewById(R.id.btnHelpSupport)
+        btnAbout = view.findViewById(R.id.btnAbout)
         
         btnLogoutContainer = view.findViewById(R.id.btnLogoutContainer)
-        tvCopyright = view.findViewById(R.id.tvCopyright)
 
         val sharedPref = requireActivity().getSharedPreferences("user_session", Context.MODE_PRIVATE)
         currentUserId = sharedPref.getInt("user_id", -1)
@@ -132,41 +126,21 @@ class ProfilFragment : Fragment() {
         // Fullscreen view
         ivProfilePicture.setOnClickListener { showFullScreenImage() }
 
-        // Edit Name
-        iconEditName.setOnClickListener { enableEditing(etEditName, currentUser?.name ?: "") }
-        btnSaveName.setOnClickListener {
-            val newName = etEditName.text.toString()
-            if (newName.isNotBlank() && newName != currentUser?.name) {
-                updateDatabaseField { db -> db.userDao().updateName(currentUserId, newName) }
-                disableEditing(etEditName, newName)
-            } else {
-                disableEditing(etEditName, currentUser?.name ?: "")
-            }
+        // New Menu Items click listeners (no-ops for now)
+        btnUpdateInfo.setOnClickListener {
+            Toast.makeText(requireContext(), "Mettre à jour mes informations", Toast.LENGTH_SHORT).show()
         }
-        
-        // Edit Password
-        iconEditPassword.setOnClickListener { enableEditing(etEditPassword, "") } // Keep empty for password
-        btnSavePassword.setOnClickListener {
-            val newPass = etEditPassword.text.toString()
-            if (newPass.isNotBlank()) {
-                updateDatabaseField { db -> db.userDao().updatePassword(currentUserId, newPass) }
-                disableEditing(etEditPassword, "")
-                Toast.makeText(context, "Mot de passe modifié", Toast.LENGTH_SHORT).show()
-            } else {
-                disableEditing(etEditPassword, "")
-            }
+        btnSecurity.setOnClickListener {
+            Toast.makeText(requireContext(), "Sécurité", Toast.LENGTH_SHORT).show()
         }
-        
-        // Edit Goal
-        iconEditGoal.setOnClickListener { enableEditing(etEditGoal, currentUser?.dailyCalorieGoal?.toString() ?: "2100") }
-        btnSaveGoal.setOnClickListener {
-            val newGoal = etEditGoal.text.toString().toIntOrNull()
-            if (newGoal != null && newGoal > 0) {
-                updateDatabaseField { db -> db.userDao().updateDailyGoal(currentUserId, newGoal) }
-                disableEditing(etEditGoal, newGoal.toString())
-            } else {
-                disableEditing(etEditGoal, currentUser?.dailyCalorieGoal?.toString() ?: "2100")
-            }
+        btnPreferences.setOnClickListener {
+            Toast.makeText(requireContext(), "Mes préférences", Toast.LENGTH_SHORT).show()
+        }
+        btnHelpSupport.setOnClickListener {
+            Toast.makeText(requireContext(), "Aide et support", Toast.LENGTH_SHORT).show()
+        }
+        btnAbout.setOnClickListener {
+            Toast.makeText(requireContext(), "À propos de nous", Toast.LENGTH_SHORT).show()
         }
 
         // Logout
@@ -177,38 +151,8 @@ class ProfilFragment : Fragment() {
             }
             findNavController().navigate(R.id.action_profil_to_login)
         }
-        
-        // Footer Link
-        tvCopyright.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/joekakone/calories-tracker"))
-            startActivity(intent)
-        }
     }
-
-    private fun enableEditing(editText: EditText, currentText: String) {
-        editText.isEnabled = true
-        editText.setText(currentText)
-        editText.requestFocus()
-        // Selection at end
-        editText.setSelection(editText.text.length)
-        // Show keyboard
-        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
-        imm.showSoftInput(editText, android.view.inputmethod.InputMethodManager.SHOW_IMPLICIT)
-    }
-
-    private fun disableEditing(editText: EditText, text: String) {
-        editText.isEnabled = false
-        if (editText.inputType != android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD && 
-            editText.inputType != (android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD)) {
-            editText.setText(text)
-        } else {
-            editText.setText("")
-        }
-        // Hide keyboard
-        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
-        imm.hideSoftInputFromWindow(editText.windowToken, 0)
-    }
-
+    
     private fun updateDatabaseField(action: suspend (AppDatabase) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
             val db = AppDatabase.getDatabase(requireContext())
@@ -232,8 +176,6 @@ class ProfilFragment : Fragment() {
                         
                         tvProfileName.text = user.name
                         tvProfileEmail.text = user.email
-                        etEditName.hint = user.name
-                        etEditGoal.hint = "Objectif calorique (${user.dailyCalorieGoal})"
                         
                         updateAvatarUI(user.name, user.profilePictureUri)
                     }
@@ -300,17 +242,60 @@ class ProfilFragment : Fragment() {
     }
 
     private fun showPhotoOptionsDialog() {
-        val options = arrayOf("Prendre une photo", "Importer depuis la galerie", "Supprimer la photo")
-        AlertDialog.Builder(requireContext())
-            .setTitle("Photo de profil")
-            .setItems(options) { _, which ->
-                when (which) {
-                    0 -> takePictureLauncher.launch(null)
-                    1 -> pickGalleryLauncher.launch("image/*")
-                    2 -> removeProfilePicture()
-                }
+        val bottomSheetDialog = com.google.android.material.bottomsheet.BottomSheetDialog(requireContext())
+        val bottomSheetView = layoutInflater.inflate(R.layout.layout_bottom_sheet_profile_photo, null)
+        bottomSheetDialog.setContentView(bottomSheetView)
+
+        // Initials and Profile Picture
+        val tvBsInitials = bottomSheetView.findViewById<TextView>(R.id.tvBsInitials)
+        val ivBsProfilePicture = bottomSheetView.findViewById<ImageView>(R.id.ivBsProfilePicture)
+        
+        if (!currentProfileUri.isNullOrEmpty()) {
+            val file = File(currentProfileUri!!)
+            if (file.exists()) {
+                val bitmap = BitmapFactory.decodeFile(file.absolutePath)
+                ivBsProfilePicture.setImageBitmap(bitmap)
+                ivBsProfilePicture.visibility = View.VISIBLE
+                tvBsInitials.visibility = View.GONE
+            } else {
+                ivBsProfilePicture.visibility = View.GONE
+                tvBsInitials.visibility = View.VISIBLE
+                tvBsInitials.text = getInitials(currentUser?.name ?: "")
             }
-            .show()
+        } else {
+            ivBsProfilePicture.visibility = View.GONE
+            tvBsInitials.visibility = View.VISIBLE
+            tvBsInitials.text = getInitials(currentUser?.name ?: "")
+        }
+
+        // Close button
+        bottomSheetView.findViewById<View>(R.id.btnClose).setOnClickListener {
+            bottomSheetDialog.dismiss()
+        }
+
+        // Delete photo (Trash icon)
+        bottomSheetView.findViewById<View>(R.id.btnDeletePhoto).setOnClickListener {
+            removeProfilePicture()
+            bottomSheetDialog.dismiss()
+        }
+
+        // Camera button
+        bottomSheetView.findViewById<View>(R.id.btnBsCamera).setOnClickListener {
+            if (androidx.core.content.ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.CAMERA) == android.content.pm.PackageManager.PERMISSION_GRANTED) {
+                takePictureLauncher.launch(null)
+            } else {
+                requestCameraPermissionLauncher.launch(android.Manifest.permission.CAMERA)
+            }
+            bottomSheetDialog.dismiss()
+        }
+
+        // Gallery button
+        bottomSheetView.findViewById<View>(R.id.btnBsGallery).setOnClickListener {
+            pickGalleryLauncher.launch("image/*")
+            bottomSheetDialog.dismiss()
+        }
+
+        bottomSheetDialog.show()
     }
 
     private fun launchUCrop(sourceUri: Uri) {

@@ -61,6 +61,7 @@ class LoginFragment : Fragment() {
                 val sharedPref = requireActivity().getSharedPreferences("user_session", Context.MODE_PRIVATE)
                 with(sharedPref.edit()) {
                     putInt("user_id", user.id)
+                    putLong("last_active_time", System.currentTimeMillis())
                     apply()
                 }
                 

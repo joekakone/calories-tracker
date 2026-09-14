@@ -31,6 +31,8 @@
             android:layout_marginEnd="16dp"
             android:background="@android:color/transparent"
             app:elevation="0dp"
+            app:itemIconTint="@color/nav_item_color"
+            app:itemTextColor="@color/nav_item_color"
             app:menu="@menu/bottom_nav_menu" />
 
     </com.google.android.material.bottomappbar.BottomAppBar>
@@ -41,7 +43,7 @@
         android:layout_height="wrap_content"
         android:src="@android:drawable/ic_input_add"
         app:tint="#FFFFFF"
-        app:backgroundTint="#00E5FF"
+        app:backgroundTint="@color/primary_blue"
         app:layout_anchor="@id/bottomAppBar"
         app:layout_anchorGravity="center" />
 

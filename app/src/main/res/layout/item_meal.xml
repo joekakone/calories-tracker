@@ -21,9 +21,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Breakfast"
-            android:textColor="#000000"
+            android:textColor="@color/text_title"
             android:textSize="16sp"
-            android:textStyle="bold"
+            android:fontFamily="@font/poppins_bold"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/cvImageContainer"
@@ -34,24 +34,18 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Combo Cheesy Sunny Side-up"
-            android:textColor="#333333"
+            android:textColor="@color/text_subtitle"
             android:textSize="14sp"
+            android:fontFamily="@font/poppins"
             app:layout_constraintTop_toBottomOf="@+id/tvMealType"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/cvImageContainer"
             android:layout_marginEnd="16dp"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginTop="0dp"
+            android:maxLines="2"
+            android:ellipsize="end"/>
 
-        <TextView
-            android:id="@+id/tvDetailLink"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Detail Composition"
-            android:textColor="#FF5722"
-            android:textSize="12sp"
-            app:layout_constraintTop_toBottomOf="@+id/tvMealName"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="8dp"/>
+
 
         <LinearLayout
             android:id="@+id/llMacros"
@@ -64,88 +58,55 @@
             android:layout_marginEnd="16dp"
             android:layout_marginTop="16dp">
 
-            <!-- Protein Badge -->
-            <LinearLayout
+            <!-- Carbs (Glucides) -->
+            <TextView
+                android:id="@+id/tvCarbsBadge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_rounded_white"
-                android:backgroundTint="#F5F5F5"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="G: 34g"
+                android:textColor="@color/macro_carbs"
+                android:textSize="13sp"
+                android:fontFamily="@font/poppins_bold"
+                android:background="@drawable/bg_pill"
+                android:backgroundTint="#F2F4F7"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 android:paddingTop="4dp"
-                android:paddingBottom="4dp"
-                android:gravity="center_vertical"
-                android:layout_marginEnd="8dp">
-                <ImageView
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:src="@android:drawable/ic_menu_camera"
-                    app:tint="#555555"/>
-                <TextView
-                    android:id="@+id/tvProteinBadge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="15g"
-                    android:textColor="#333333"
-                    android:textSize="12sp"
-                    android:textStyle="bold"/>
-            </LinearLayout>
+                android:paddingBottom="4dp"/>
 
-            <!-- Carbs Badge -->
-            <LinearLayout
+            <!-- Protein -->
+            <TextView
+                android:id="@+id/tvProteinBadge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_rounded_white"
-                android:backgroundTint="#F5F5F5"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="P: 15g"
+                android:textColor="@color/macro_protein"
+                android:textSize="13sp"
+                android:fontFamily="@font/poppins_bold"
+                android:background="@drawable/bg_pill"
+                android:backgroundTint="#F2F4F7"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 android:paddingTop="4dp"
-                android:paddingBottom="4dp"
-                android:gravity="center_vertical"
-                android:layout_marginEnd="8dp">
-                <ImageView
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:src="@android:drawable/ic_menu_agenda"
-                    app:tint="#555555"/>
-                <TextView
-                    android:id="@+id/tvCarbsBadge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="34g"
-                    android:textColor="#333333"
-                    android:textSize="12sp"
-                    android:textStyle="bold"/>
-            </LinearLayout>
+                android:paddingBottom="4dp"/>
 
-            <!-- Fat Badge -->
-            <LinearLayout
+            <!-- Fat (Lipides) -->
+            <TextView
+                android:id="@+id/tvFatBadge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_rounded_white"
-                android:backgroundTint="#F5F5F5"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
+                android:text="L: 12g"
+                android:textColor="@color/macro_fat"
+                android:textSize="13sp"
+                android:fontFamily="@font/poppins_bold"
+                android:background="@drawable/bg_pill"
+                android:backgroundTint="#F2F4F7"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 android:paddingTop="4dp"
-                android:paddingBottom="4dp"
-                android:gravity="center_vertical">
-                <ImageView
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:src="@android:drawable/ic_menu_compass"
-                    app:tint="#FFC107"/>
-                <TextView
-                    android:id="@+id/tvFatBadge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="12g"
-                    android:textColor="#333333"
-                    android:textSize="12sp"
-                    android:textStyle="bold"/>
-            </LinearLayout>
+                android:paddingBottom="4dp"/>
         </LinearLayout>
 
         <!-- Right Side Image Container -->
@@ -182,7 +143,7 @@
                 android:text="475 Kcal"
                 android:textColor="#FFFFFF"
                 android:textSize="12sp"
-                android:textStyle="bold"/>
+                android:fontFamily="@font/poppins_bold"/>
         </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
